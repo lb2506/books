@@ -17,7 +17,7 @@ const AddBook = () => {
         const token = localStorage.getItem('token');
 
         await axios.post(
-            'http://localhost:5000/books',
+            'https://books-zpg6.onrender.com/books',
             { title, ageLower, ageUpper, genre, author, summary },
             { headers: { Authorization: `Bearer ${token}` } }
         );

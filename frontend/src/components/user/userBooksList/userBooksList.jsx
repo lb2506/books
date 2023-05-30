@@ -16,7 +16,7 @@ const UserBooksList = () => {
 
             try {
                 setIsLoading(true);
-                const response = await axios.get('http://localhost:5000/userReadList', {
+                const response = await axios.get('https://books-zpg6.onrender.com/userReadList', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReadingList(response.data.readingList);
@@ -35,7 +35,7 @@ const UserBooksList = () => {
 
             try {
                 setIsLoading(true);
-                const response = await axios.get('http://localhost:5000/userAlreadyReadList', {
+                const response = await axios.get('https://books-zpg6.onrender.com/userAlreadyReadList', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setAlreadyReadList(response.data.alreadyReadList);
@@ -57,7 +57,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.delete(`http://localhost:5000/readingList/remove/${bookId}`, {
+            await axios.delete(`https://books-zpg6.onrender.com/readingList/remove/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setReadingList(readingList.filter(book => book._id !== bookId));
@@ -74,7 +74,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.post(`http://localhost:5000/alreadyReadList/add`, { bookId }, {
+            await axios.post(`https://books-zpg6.onrender.com/alreadyReadList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = readingList.find(book => book._id === bookId);
@@ -93,7 +93,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.delete(`http://localhost:5000/alreadyReadList/remove/${bookId}`, {
+            await axios.delete(`https://books-zpg6.onrender.com/alreadyReadList/remove/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setAlreadyReadList(alreadyReadList.filter(book => book._id !== bookId));

@@ -12,7 +12,7 @@ const AdminPanel = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             setIsLoading(true);
-            const response = await axios.get('http://localhost:5000/books')
+            const response = await axios.get('https://books-zpg6.onrender.com/books')
             setBooks(response.data);
             setIsLoading(false);
         };
@@ -23,7 +23,7 @@ const AdminPanel = () => {
     const handleDelete = async (id) => {
         const token = localStorage.getItem('token');
 
-        await axios.delete(`http://localhost:5000/books/${id}`,
+        await axios.delete(`https://books-zpg6.onrender.com/books/${id}`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
         setBooks(books.filter((book) => book._id !== id));

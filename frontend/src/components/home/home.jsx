@@ -19,7 +19,7 @@ const Home = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             setIsLoading(true);
-            const response = await axios.get('http://localhost:5000/books')
+            const response = await axios.get('https://books-zpg6.onrender.com/books')
             setBooks(response.data);
             setFilteredBooks(response.data);
             setIsLoading(false);
@@ -30,7 +30,7 @@ const Home = () => {
             if (!token) return;
 
             try {
-                const response = await axios.get('http://localhost:5000/userReadList', {
+                const response = await axios.get('https://books-zpg6.onrender.com/userReadList', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReadingList(response.data.readingList);
@@ -44,7 +44,7 @@ const Home = () => {
             if (!token) return;
 
             try {
-                const response = await axios.get('http://localhost:5000/userAlreadyReadList', {
+                const response = await axios.get('https://books-zpg6.onrender.com/userAlreadyReadList', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setAlreadyReadList(response.data.alreadyReadList);
@@ -86,7 +86,7 @@ const Home = () => {
         }
 
         try {
-            await axios.post(`http://localhost:5000/readingList/add`, { bookId }, {
+            await axios.post(`https://books-zpg6.onrender.com/readingList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = books.find(book => book._id === bookId);
@@ -104,7 +104,7 @@ const Home = () => {
         }
 
         try {
-            await axios.post(`http://localhost:5000/alreadyReadList/add`, { bookId }, {
+            await axios.post(`https://books-zpg6.onrender.com/alreadyReadList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = books.find(book => book._id === bookId);

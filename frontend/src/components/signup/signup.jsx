@@ -13,7 +13,7 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await axios.post('http://localhost:5000/signup', { email, password });
+        const response = await axios.post('https://books-zpg6.onrender.com/signup', { email, password });
         localStorage.setItem('token', response.data.token);
 
         navigate('/');

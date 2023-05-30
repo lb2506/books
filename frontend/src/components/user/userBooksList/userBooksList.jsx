@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { url } from '../../api';
 
 const UserBooksList = () => {
     const [readingList, setReadingList] = useState([]);
@@ -16,7 +17,7 @@ const UserBooksList = () => {
 
             try {
                 setIsLoading(true);
-                const response = await axios.get('https://books-zpg6.onrender.com/userReadList', {
+                const response = await axios.get(`${url}/userReadList`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReadingList(response.data.readingList);
@@ -35,7 +36,7 @@ const UserBooksList = () => {
 
             try {
                 setIsLoading(true);
-                const response = await axios.get('https://books-zpg6.onrender.com/userAlreadyReadList', {
+                const response = await axios.get(`${url}/userAlreadyReadList`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setAlreadyReadList(response.data.alreadyReadList);
@@ -57,7 +58,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.delete(`https://books-zpg6.onrender.com/readingList/remove/${bookId}`, {
+            await axios.delete(`${url}/readingList/remove/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setReadingList(readingList.filter(book => book._id !== bookId));
@@ -74,7 +75,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.post(`https://books-zpg6.onrender.com/alreadyReadList/add`, { bookId }, {
+            await axios.post(`${url}/alreadyReadList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = readingList.find(book => book._id === bookId);
@@ -93,7 +94,7 @@ const UserBooksList = () => {
         }
 
         try {
-            await axios.delete(`https://books-zpg6.onrender.com/alreadyReadList/remove/${bookId}`, {
+            await axios.delete(`${url}/alreadyReadList/remove/${bookId}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setAlreadyReadList(alreadyReadList.filter(book => book._id !== bookId));

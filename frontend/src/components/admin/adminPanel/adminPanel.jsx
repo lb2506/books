@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { url } from '../../api';
 import "./adminPanel.scss"
 
 const AdminPanel = () => {
@@ -12,7 +13,7 @@ const AdminPanel = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             setIsLoading(true);
-            const response = await axios.get('https://books-zpg6.onrender.com/books')
+            const response = await axios.get(`${url}/books`)
             setBooks(response.data);
             setIsLoading(false);
         };
@@ -23,7 +24,7 @@ const AdminPanel = () => {
     const handleDelete = async (id) => {
         const token = localStorage.getItem('token');
 
-        await axios.delete(`https://books-zpg6.onrender.com/books/${id}`,
+        await axios.delete(`${url}/books/${id}`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
         setBooks(books.filter((book) => book._id !== id));

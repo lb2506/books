@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { url } from '../../api';
+
 
 const AddBook = () => {
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ const AddBook = () => {
 
         try {
             await axios.post(
-                'https://books-zpg6.onrender.com/books',
+                `${url}/books`,
                 { title, ageLower, ageUpper, genre, author, summary, image },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

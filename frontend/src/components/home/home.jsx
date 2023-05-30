@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import { url } from '../../api';
 
 import "./home.scss"
 
@@ -19,7 +20,7 @@ const Home = () => {
     useEffect(() => {
         const fetchBooks = async () => {
             setIsLoading(true);
-            const response = await axios.get('https://books-zpg6.onrender.com/books')
+            const response = await axios.get(`${url}/books`)
             setBooks(response.data);
             setFilteredBooks(response.data);
             setIsLoading(false);
@@ -30,7 +31,7 @@ const Home = () => {
             if (!token) return;
 
             try {
-                const response = await axios.get('https://books-zpg6.onrender.com/userReadList', {
+                const response = await axios.get(`${url}/userReadList`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setReadingList(response.data.readingList);
@@ -44,7 +45,7 @@ const Home = () => {
             if (!token) return;
 
             try {
-                const response = await axios.get('https://books-zpg6.onrender.com/userAlreadyReadList', {
+                const response = await axios.get(`${url}/userAlreadyReadList`, {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setAlreadyReadList(response.data.alreadyReadList);
@@ -86,7 +87,7 @@ const Home = () => {
         }
 
         try {
-            await axios.post(`https://books-zpg6.onrender.com/readingList/add`, { bookId }, {
+            await axios.post(`${url}/readingList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = books.find(book => book._id === bookId);
@@ -104,7 +105,7 @@ const Home = () => {
         }
 
         try {
-            await axios.post(`https://books-zpg6.onrender.com/alreadyReadList/add`, { bookId }, {
+            await axios.post(`${url}/alreadyReadList/add`, { bookId }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const addedBook = books.find(book => book._id === bookId);

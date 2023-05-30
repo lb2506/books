@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { url } from '../../api';
 
 
 const Register = () => {
@@ -17,7 +18,7 @@ const Register = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 try{
-        const response = await axios.post('https://books-zpg6.onrender.com/register', { email, password });
+        const response = await axios.post(`${url}/register`, { email, password });
         localStorage.setItem('token', response.data.token);
 
         navigate('/');

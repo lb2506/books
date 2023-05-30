@@ -28,7 +28,11 @@ const BookSchema = new mongoose.Schema({
     ageUpper: {
         type: Number,
         required: true
-    }
+    },
+    image:
+    { type: Object,
+        required: true
+    },
 });
 
 module.exports = mongoose.model('Book', BookSchema);

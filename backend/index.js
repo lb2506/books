@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const booksRoutes = require('./routes/books');
 const registerRoutes = require('./routes/register')
 const loginRoutes = require('./routes/login')
@@ -9,6 +10,9 @@ const usersRoutes = require('./routes/users')
 require('dotenv').config();
 const cors = require('cors');
 const app = express();
+
+app.use(bodyParser.json({ limit: '20mb', extended: true }))
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }))
 
 app.use(cors());
 app.use(express.json());

@@ -1,4 +1,9 @@
-*{
+* {
   margin: 0;
   padding: 0;
+}
+
+img {
+  max-width: 200px;
+  aspect-ratio: 1/1;
 }

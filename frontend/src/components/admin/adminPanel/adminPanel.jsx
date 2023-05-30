@@ -6,7 +6,7 @@ import "./adminPanel.scss"
 const AdminPanel = () => {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
-    const [isLoading, setIsLoading] = useState(false); // new state
+    const [isLoading, setIsLoading] = useState(false);
 
 
     useEffect(() => {
@@ -38,9 +38,9 @@ const AdminPanel = () => {
                 <>
                     <button onClick={() => navigate('/adminPanel/addBook')}>Ajouter un livre</button>
                     <ul>
-                        {books.map((book) => (
+                        {books && books?.map((book) => (
                             <li key={book._id}>
-                                {book.title} / {book.ageLower} - {book.ageUpper} / {book.genre} / {book.summary} / {book.author}
+                                <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} / {book.genre} / {book.summary} / {book.author}
                                 <button onClick={() => handleDelete(book._id)}>Supprimer</button>
                             </li>
                         ))}

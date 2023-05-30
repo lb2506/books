@@ -14,7 +14,6 @@ router.post('/login', async (req, res) => {
     if (!isMatch) throw new Error();
     const token = jwt.sign({ _id: user._id.toString(), role: user.role, readingList: user.readingList }, process.env.JWT_SECRET_KEY);
     res.send({ user, token });
-    console.log(user);
   } catch (error) {
     res.status(401).send({ error: `Utilisateur inexistant, veuillez réessayer` });
   }

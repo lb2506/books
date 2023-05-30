@@ -13,7 +13,7 @@ router.post('/readingList/add', async (req, res) => {
         if (!book) return res.status(404).send();
 
         const token = req.header('Authorization').replace('Bearer ', '');
-        const decoded = jwt.verify(token, process.env.CRET_KEY);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
         const user = await User.findById(decoded._id);
         if (!user) return res.status(404).send();
 

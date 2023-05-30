@@ -10,30 +10,55 @@ const AddBook = () => {
     const [summary, setSummary] = useState('')
     const [ageLower, setAgeLower] = useState('');
     const [ageUpper, setAgeUpper] = useState('');
+    const [image, setImage] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const token = localStorage.getItem('token');
 
-        await axios.post(
-            'https://books-zpg6.onrender.com/books',
-            { title, ageLower, ageUpper, genre, author, summary },
-            { headers: { Authorization: `Bearer ${token}` } }
-        );
+        try {
+            await axios.post(
+                'https://books-zpg6.onrender.com/books',
+                { title, ageLower, ageUpper, genre, author, summary, image },
+                { headers: { Authorization: `Bearer ${token}` } }
+            );
 
-        navigate('/adminPanel');
+            navigate('/adminPanel');
+        } catch (error) {
+            console.error(error.response.data);
+        }
+    };
+
+    const handleProductImageUpload = (e) => {
+        const file = e.target.files[0];
+
+        TransformFileData(file);
+    };
+
+    const TransformFileData = (file) => {
+        const reader = new FileReader();
+
+        if (file) {
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                setImage(reader.result);
+            };
+        } else {
+            setImage("");
+        }
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-            <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Auteur" />
-            <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} placeholder="Genre" />
-            <input type="text" value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Description" />
-            <input type="number" value={ageLower} onChange={(e) => setAgeLower(e.target.value)} placeholder="Age Min" />
-            <input type="number" value={ageUpper} onChange={(e) => setAgeUpper(e.target.value)} placeholder="Age Max" />
-            <button type="submit">Ajouter</button>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
+            <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Auteur" required />
+            <input type="text" value={genre} onChange={(e) => setGenre(e.target.value)} placeholder="Genre" required />
+            <input type="text" value={summary} onChange={(e) => setSummary(e.target.value)} placeholder="Description" required />
+            <input type="number" value={ageLower} onChange={(e) => setAgeLower(e.target.value)} placeholder="Age Min" required />
+            <input type="number" value={ageUpper} onChange={(e) => setAgeUpper(e.target.value)} placeholder="Age Max" required />
+            <input type="file" id="imgUpload" accept="image/*" onChange={handleProductImageUpload} required />
+            <button type="submit">Ajouter le livre</button>
         </form>
     );
 };

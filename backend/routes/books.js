@@ -1,6 +1,7 @@
 const Book = require('../models/book');
 const express = require('express');
 const adminAuth = require('../middleware/auth');
+const cloudinary = require("../cloudinary")
 const router = express.Router();
 
 // Récupérer tous les livres
@@ -27,9 +28,12 @@ router.get('/books/:ageRange', async (req, res) => {
 
 // Ajouter un livre
 
-router.post('/books', adminAuth ,async (req, res) => {
-    const book = new Book(req.body);
+router.post('/books', adminAuth, async (req, res) => {
     try {
+        const uploadedResponse = await cloudinary.uploader.upload(req.body.image, {
+            upload_preset: "books",
+        });
+        const book = new Book({ ...req.body, image: uploadedResponse });
         await book.save();
         res.status(201).send(book);
         console.log("Livre ajouté avec succès !");
@@ -40,9 +44,10 @@ router.post('/books', adminAuth ,async (req, res) => {
 
 // Supprimer un livre
 
-router.delete('/books/:id', adminAuth ,async (req, res) => {
+router.delete('/books/:id', adminAuth, async (req, res) => {
     try {
         const book = await Book.findByIdAndDelete(req.params.id);
+        await cloudinary.uploader.destroy(book.image.public_id);
 
         if (!book) {
             return res.status(404).send();

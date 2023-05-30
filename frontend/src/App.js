@@ -19,7 +19,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/register" element={<register />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminPanel" element={<AdminPanel />} />
           <Route path="/adminPanel/addBook" element={<AddBook />} />

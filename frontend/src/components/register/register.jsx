@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-const SignUp = () => {
+const Register = () => {
 
     const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ const SignUp = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
 try{
-        const response = await axios.post('https://books-zpg6.onrender.com/signup', { email, password });
+        const response = await axios.post('https://books-zpg6.onrender.com/register', { email, password });
         localStorage.setItem('token', response.data.token);
 
         navigate('/');
@@ -46,4 +46,4 @@ try{
     );
 };
 
-export default SignUp
+export default Register

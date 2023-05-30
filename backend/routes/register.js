@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 
-router.post('/signup', async (req, res) => {
+router.post('/register', async (req, res) => {
   try {
 
     const existingUser = await User.findOne({ email: req.body.email });

@@ -35,7 +35,7 @@ const Navbar = () => {
             </div>
             <div>
                 { role === "admin" && <button onClick={() => navigate("/adminPanel")}>Administration</button> }
-                { !isLoggedIn && <button onClick={() => navigate("/signup")}>Inscription</button> }
+                { !isLoggedIn && <button onClick={() => navigate("/register")}>Inscription</button> }
                 { !isLoggedIn && <button onClick={() => navigate("/login")}>Connexion</button> }
                 { isLoggedIn && <button onClick={logout}>Déconnexion</button> }
             </div>

@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import NavBar from "./components/navbar/navbar"
 import Home from "./components/home/home"
-import SignUp from "./components/signup/signup"
+import register from "./components/register/register"
 import Login from "./components/login/login"
 import AdminPanel from "./components/admin/adminPanel/adminPanel";
 import UserBooksList from "./components/user/userBooksList/userBooksList";
@@ -19,7 +19,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/register" element={<register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/adminPanel" element={<AdminPanel />} />
           <Route path="/adminPanel/addBook" element={<AddBook />} />

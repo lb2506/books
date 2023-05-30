@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { url } from '../../api';
+import { url } from '../../../api';
 import "./adminPanel.scss"
 
 const AdminPanel = () => {

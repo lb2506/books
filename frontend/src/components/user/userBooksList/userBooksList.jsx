@@ -116,7 +116,7 @@ const UserBooksList = () => {
                             const isBookInAlreadyReadList = alreadyReadList.some(alreadyReadBook => alreadyReadBook._id.toString() === book._id);
                             return (
                                 <li key={book._id}>
-                                    <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} / {book.genre} / {book.summary} / {book.author}
+                                    <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
                                     <button onClick={() => removeFromReadingList(book._id)}>Supprimer</button>
                                     {!isBookInAlreadyReadList && <button onClick={() => addToAlreadyReadList(book._id)}>Déjà lu</button>}
                                 </li>
@@ -127,7 +127,7 @@ const UserBooksList = () => {
                     <ul>
                         {alreadyReadList.map((book) => (
                             <li key={book._id}>
-                                <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} / {book.genre} / {book.summary} / {book.author}
+                                <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
                                 <button onClick={() => removeFromAlreadyReadList(book._id)}>Supprimer</button>
                             </li>
                         ))}

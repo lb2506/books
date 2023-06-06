@@ -137,7 +137,7 @@ const FindLibrary = () => {
                         <button onClick={resetFilters}>Réinitialiser</button>
                     </div>
                     <div>
-                        <h3>Rechercher une librairire autour de moi :</h3>
+                        <h3>Rechercher une librairie autour de moi :</h3>
                         <select
                             disabled={!geoEnabled}
                             title={geoEnabled ? "" : "Activez la géolocalisation pour utiliser cette fonctionnalité."}

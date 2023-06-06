@@ -100,8 +100,10 @@ const FindLibrary = () => {
 
     const resetProximityFilter = () => {
         setRadius(null);
+        setDisplayCount(10); // reset le nombre de librairies affichées à 10
         setFilteredLibraries(librairies);
     };
+    
 
     return (
         <div className="findLibrary">

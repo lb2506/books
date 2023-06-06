@@ -13,11 +13,13 @@ const AddBook = () => {
     const [ageLower, setAgeLower] = useState('');
     const [ageUpper, setAgeUpper] = useState('');
     const [image, setImage] = useState('');
+    const [buttonLabel, setButtonLabel] = useState('Ajouter le livre');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const token = localStorage.getItem('token');
+        setButtonLabel('En cours ...');
 
         try {
             await axios.post(
@@ -29,6 +31,7 @@ const AddBook = () => {
             navigate('/adminPanel');
         } catch (error) {
             console.error(error.response.data);
+            setButtonLabel('Ajouter le livre');
         }
     };
 
@@ -60,7 +63,7 @@ const AddBook = () => {
             <input type="number" value={ageLower} onChange={(e) => setAgeLower(e.target.value)} placeholder="Age Min" required />
             <input type="number" value={ageUpper} onChange={(e) => setAgeUpper(e.target.value)} placeholder="Age Max" required />
             <input type="file" id="imgUpload" accept="image/*" onChange={handleProductImageUpload} required />
-            <button type="submit">Ajouter le livre</button>
+            <button type="submit">{buttonLabel}</button>
         </form>
     );
 };

@@ -8,7 +8,7 @@ const AdminPanel = () => {
     const navigate = useNavigate();
     const [books, setBooks] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-
+    const [deletingBookId, setDeletingBookId] = useState(null);
 
     useEffect(() => {
         const fetchBooks = async () => {
@@ -22,11 +22,14 @@ const AdminPanel = () => {
 
     const handleDelete = async (id) => {
         const token = localStorage.getItem('token');
+        setDeletingBookId(id);
 
         await axios.delete(`${url}/books/${id}`,
             { headers: { Authorization: `Bearer ${token}` } }
         );
         setBooks(books.filter((book) => book._id !== id));
+        setDeletingBookId(null);
+
     };
 
     return (
@@ -40,8 +43,10 @@ const AdminPanel = () => {
                     <ul>
                         {books && books?.map((book) => (
                             <li key={book._id}>
-                                <img src={book.image.secure_url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
-                                <button onClick={() => handleDelete(book._id)}>Supprimer</button>
+                                <img src={book.image.secure_url} alt="book" /> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
+                                <button onClick={() => handleDelete(book._id)}>
+                                    {deletingBookId === book._id ? 'En cours...' : 'Supprimer'}
+                                </button>
                             </li>
                         ))}
                     </ul>

@@ -15,6 +15,7 @@ const FindLibrary = () => {
     });
     const [radius, setRadius] = useState(null); // Le rayon de recherche, en km
     const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
+    const [geoEnabled, setGeoEnabled] = useState(true);
 
     useEffect(() => {
         const fetchLib = async () => {
@@ -61,8 +62,13 @@ const FindLibrary = () => {
                 },
                 function (error) {
                     console.error("Error Code = " + error.code + " - " + error.message);
+                    if (error.code === 1) { // Code 1 indique que la permission a été refusée
+                        setGeoEnabled(false);
+                    }
                 }
             );
+        } else {
+            setGeoEnabled(false); // Géolocalisation non prise en charge par le navigateur
         }
     }, []);
 
@@ -122,16 +128,19 @@ const FindLibrary = () => {
                             onChange={e => setFilter(prev => ({ ...prev, city: e.target.value }))}
                         />
                         <button onClick={applyFilters}>Rechercher</button>
-                        <button onClick={resetFilters}>Réinitialiser les filtres</button>
+                        <button onClick={resetFilters}>Réinitialiser</button>
                     </div>
                     <div>
                         <h3>Rechercher autour de moi :</h3>
                         <select
+                            disabled={!geoEnabled}
+                            title={geoEnabled ? "" : "Activez la géolocalisation pour utiliser cette fonctionnalité."}
                             value={radius}
                             onChange={e => setRadius(Number(e.target.value))}
                         >
                             <option value="">Sélectionnez un rayon...</option>
-                            <option value="5">0-5km</option>
+                            <option value="2">0-2km</option>
+                            <option value="5">2-5km</option>
                             <option value="10">5-10km</option>
                             <option value="15">10-15km</option>
                             <option value="20">15-20km</option>
@@ -139,7 +148,7 @@ const FindLibrary = () => {
                             <option value="30">25-30km</option>
                         </select>
                         <button onClick={applyProximityFilter}>Rechercher</button>
-                        <button onClick={resetProximityFilter}>Réinitialiser le filtre de proximité</button>
+                        <button onClick={resetProximityFilter}>Réinitialiser</button>
                     </div>
                     {filteredLibraries.slice(0, displayCount).map(librairie => (
                         <div key={librairie.SIRET} style={{ borderBottom: '1px solid black' }}>

@@ -86,7 +86,7 @@ const FindLibrary = () => {
         };
 
         const newFilteredLibraries = librairies.filter(librairie =>
-            haversineDistance(userLocation, { latitude: librairie.Latitude, longitude: librairie.Longitude }) <= radius
+            haversineDistance(userLocation, { latitude: librairie.latitude, longitude: librairie.longitude }) <= radius
         );
 
         setFilteredLibraries(newFilteredLibraries);

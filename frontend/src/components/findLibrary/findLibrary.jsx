@@ -141,7 +141,7 @@ const FindLibrary = () => {
                                 {filteredLibraries.slice(0, displayCount).map(librairie => (
                                     <Marker
                                         key={librairie.SIRET}
-                                        position={{ lat: librairie.Latitude, lng: librairie.Longitude }}
+                                        position={{ lat: librairie.latitude, lng: librairie.longitude }}
                                     />
                                 ))}
                             </MapContainer>

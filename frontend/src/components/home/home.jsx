@@ -23,7 +23,6 @@ const Home = () => {
             const response = await axios.get(`${url}/books`)
             setBooks(response.data);
             setFilteredBooks(response.data);
-            console.log(books);
             setIsLoading(false);
         };
 

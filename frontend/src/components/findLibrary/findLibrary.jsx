@@ -139,10 +139,12 @@ const FindLibrary = () => {
                                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 />
                                 {filteredLibraries.slice(0, displayCount).map(librairie => (
-                                    <Marker
-                                        key={librairie.SIRET}
-                                        position={{ lat: librairie.latitude, lng: librairie.longitude }}
-                                    />
+                                    librairie.latitude && librairie.longitude && (
+                                        <Marker
+                                            key={librairie.SIRET}
+                                            position={{ lat: librairie.latitude, lng: librairie.longitude }}
+                                        />
+                                    )
                                 ))}
                             </MapContainer>
                         )}

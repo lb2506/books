@@ -23,6 +23,7 @@ const Home = () => {
             const response = await axios.get(`${url}/books`)
             setBooks(response.data);
             setFilteredBooks(response.data);
+            console.log(books);
             setIsLoading(false);
         };
 
@@ -152,7 +153,7 @@ const Home = () => {
                             const isBookInAlreadyReadList = alreadyReadList.some(alreadyReadBook => alreadyReadBook._id.toString() === book._id);
                             return (
                                 <li key={book._id}>
-                                    <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
+                                    <img src={book.image.secure_url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
                                     {!isBookInReadingList && <button onClick={() => addToReadingList(book._id)}>Like</button>}
                                     {!isBookInAlreadyReadList && <button onClick={() => addToAlreadyReadList(book._id)}>Déjà lu</button>}
                                 </li>

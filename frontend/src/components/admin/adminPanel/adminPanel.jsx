@@ -40,7 +40,7 @@ const AdminPanel = () => {
                     <ul>
                         {books && books?.map((book) => (
                             <li key={book._id}>
-                                <img src={book.image.url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
+                                <img src={book.image.secure_url} alt="book"/> / {book.title} / {book.ageLower} - {book.ageUpper} ans / {book.genre} / {book.summary} / {book.author}
                                 <button onClick={() => handleDelete(book._id)}>Supprimer</button>
                             </li>
                         ))}

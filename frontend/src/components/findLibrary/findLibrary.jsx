@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { url_api_librairie } from '../../api';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
 import "./findLibrary.scss"
 
 const FindLibrary = () => {
@@ -129,27 +128,11 @@ const FindLibrary = () => {
                         />
                         <button onClick={applyProximityFilter}>Rechercher</button>
                     </div>
-                    {/* Ajouter une carte Leaflet */}
-                    <div>
-                        <h3>Résultats de la recherche :</h3>
-                        {userLocation.latitude && userLocation.longitude && (
-                            <MapContainer center={userLocation} zoom={13} style={{ height: "100vh", width: "100%" }}>
-                                <TileLayer
-                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                />
-                                {filteredLibraries.slice(0, displayCount).map(librairie => (
-                                    librairie.latitude && librairie.longitude && (
-                                        <Marker
-                                            key={librairie.SIRET}
-                                            position={{ lat: librairie.latitude, lng: librairie.longitude }}
-                                        />
-                                    )
-                                ))}
-                            </MapContainer>
-                        )}
-                    </div>
-
+                    {filteredLibraries.slice(0, displayCount).map(librairie => (
+                        <div key={librairie.SIRET} style={{ borderBottom: '1px solid black' }}>
+                            <p>{librairie.Designation}, {librairie.Adresse}, {librairie.Commune}</p>
+                        </div>
+                    ))}
                     {displayCount < filteredLibraries.length && (
                         <button onClick={loadMore}>Voir plus</button>
                     )}

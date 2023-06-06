@@ -132,18 +132,20 @@ const FindLibrary = () => {
                     {/* Ajouter une carte Leaflet */}
                     <div>
                         <h3>Résultats de la recherche :</h3>
-                        <MapContainer center={userLocation} zoom={13} style={{ height: "100vh", width: "100%" }}>
-                            <TileLayer
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                            />
-                            {filteredLibraries.slice(0, displayCount).map(librairie => (
-                                <Marker
-                                    key={librairie.SIRET}
-                                    position={{ lat: librairie.Latitude, lng: librairie.Longitude }}
+                        {userLocation.latitude && userLocation.longitude && (
+                            <MapContainer center={userLocation} zoom={13} style={{ height: "100vh", width: "100%" }}>
+                                <TileLayer
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                    attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                                 />
-                            ))}
-                        </MapContainer>
+                                {filteredLibraries.slice(0, displayCount).map(librairie => (
+                                    <Marker
+                                        key={librairie.SIRET}
+                                        position={{ lat: librairie.Latitude, lng: librairie.Longitude }}
+                                    />
+                                ))}
+                            </MapContainer>
+                        )}
                     </div>
 
                     {displayCount < filteredLibraries.length && (

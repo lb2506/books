@@ -17,7 +17,6 @@ const AdminPanel = () => {
             setBooks(response.data);
             setIsLoading(false);
         };
-
         fetchBooks();
     }, []);
 

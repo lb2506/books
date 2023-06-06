@@ -30,14 +30,14 @@ const Navbar = () => {
             <button onClick={() => navigate("/")}>Logo</button>
             <div>
                 <button onClick={() => navigate("/")}>Accueil</button>
-            { isLoggedIn && <button onClick={() => navigate("/booksList")}>Ma liste</button> }
-
+                {isLoggedIn && <button onClick={() => navigate("/booksList")}>Ma liste</button>}
+                <button onClick={() => navigate("/findLibrary")}>Trouver une librairie</button>
             </div>
             <div>
-                { role === "admin" && <button onClick={() => navigate("/adminPanel")}>Administration</button> }
-                { !isLoggedIn && <button onClick={() => navigate("/register")}>Inscription</button> }
-                { !isLoggedIn && <button onClick={() => navigate("/login")}>Connexion</button> }
-                { isLoggedIn && <button onClick={logout}>Déconnexion</button> }
+                {role === "admin" && <button onClick={() => navigate("/adminPanel")}>Administration</button>}
+                {!isLoggedIn && <button onClick={() => navigate("/register")}>Inscription</button>}
+                {!isLoggedIn && <button onClick={() => navigate("/login")}>Connexion</button>}
+                {isLoggedIn && <button onClick={logout}>Déconnexion</button>}
             </div>
         </div>
     )

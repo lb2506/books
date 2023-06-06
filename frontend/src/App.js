@@ -9,6 +9,7 @@ import AdminPanel from "./components/admin/adminPanel/adminPanel";
 import UserBooksList from "./components/user/userBooksList/userBooksList";
 import NotFound from "./components/notFound/notFound";
 import AddBook from "./components/admin/addBook/addBook"
+import FindLibrary from "./components/findLibrary/findLibrary"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/adminPanel" element={<AdminPanel />} />
           <Route path="/adminPanel/addBook" element={<AddBook />} />
           <Route path="/booksList" element={<UserBooksList />} />
+          <Route path="/findLibrary" element={<FindLibrary />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

@@ -94,7 +94,11 @@ const FindLibrary = () => {
         const newFilteredLibraries = librairies.filter(librairie =>
             haversineDistance(userLocation, { latitude: librairie.latitude, longitude: librairie.longitude }) <= radius
         );
-
+        setFilter({
+            designation: '',
+            address: '',
+            city: '',
+        });
         setFilteredLibraries(newFilteredLibraries);
     };
 
@@ -103,7 +107,7 @@ const FindLibrary = () => {
         setDisplayCount(10); // reset le nombre de librairies affichées à 10
         setFilteredLibraries(librairies);
     };
-    
+
 
     return (
         <div className="findLibrary">
@@ -137,8 +141,8 @@ const FindLibrary = () => {
                         <select
                             disabled={!geoEnabled}
                             title={geoEnabled ? "" : "Activez la géolocalisation pour utiliser cette fonctionnalité."}
-                            value={radius}
-                            onChange={e => setRadius(Number(e.target.value))}
+                            value={radius || ""} // utilisez "" lorsque radius est null
+                            onChange={e => setRadius(e.target.value ? Number(e.target.value) : null)} // utilisez null lorsque e.target.value est ""
                         >
                             <option value="">Sélectionnez un rayon...</option>
                             <option value="2">0-2km</option>

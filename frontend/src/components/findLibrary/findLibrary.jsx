@@ -13,7 +13,7 @@ const FindLibrary = () => {
         address: '',
         city: '',
     });
-    const [radius, setRadius] = useState(); // Le rayon de recherche, en km
+    const [radius, setRadius] = useState(null); // Le rayon de recherche, en km
     const [userLocation, setUserLocation] = useState({ latitude: null, longitude: null });
 
     useEffect(() => {
@@ -92,6 +92,11 @@ const FindLibrary = () => {
         setFilteredLibraries(newFilteredLibraries);
     };
 
+    const resetProximityFilter = () => {
+        setRadius(null);
+        setFilteredLibraries(librairies);
+    };
+
     return (
         <div className="findLibrary">
             {isLoading ? (
@@ -121,12 +126,20 @@ const FindLibrary = () => {
                     </div>
                     <div>
                         <h3>Rechercher autour de moi :</h3>
-                        <input
-                            placeholder='Rayon en km...'
+                        <select
                             value={radius}
                             onChange={e => setRadius(Number(e.target.value))}
-                        />
+                        >
+                            <option value="">Sélectionnez un rayon...</option>
+                            <option value="5">0-5km</option>
+                            <option value="10">5-10km</option>
+                            <option value="15">10-15km</option>
+                            <option value="20">15-20km</option>
+                            <option value="25">20-25km</option>
+                            <option value="30">25-30km</option>
+                        </select>
                         <button onClick={applyProximityFilter}>Rechercher</button>
+                        <button onClick={resetProximityFilter}>Réinitialiser le filtre de proximité</button>
                     </div>
                     {filteredLibraries.slice(0, displayCount).map(librairie => (
                         <div key={librairie.SIRET} style={{ borderBottom: '1px solid black' }}>
